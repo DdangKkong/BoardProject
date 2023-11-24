@@ -1,12 +1,13 @@
-package dto;
+package zerobase.boardproject.dto;
 
-import domain.Posts;
+import java.math.BigInteger;
 import java.time.LocalDateTime;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import zerobase.boardproject.domain.Posts;
 
 @Getter
 @Setter
@@ -15,8 +16,11 @@ import lombok.Setter;
 @Builder
 public class PostDto {
 
-  // 회원 닉네임
-  private String nickname;
+  // 회원 id
+  private BigInteger user_id;
+
+  // 게시글 id
+  private BigInteger post_id;
 
   // 게시글 제목
   private String title;
@@ -35,7 +39,8 @@ public class PostDto {
 
   public static PostDto fromEntity(Posts posts){
     return PostDto.builder()
-        .nickname(posts.getUser().getNickname())
+        .user_id(posts.getUser().getId())
+        .post_id(posts.getId())
         .title(posts.getTitle())
         .content(posts.getContent())
         .created_date(posts.getCreated_date())

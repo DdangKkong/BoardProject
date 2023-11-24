@@ -1,4 +1,4 @@
-package domain;
+package zerobase.boardproject.domain;
 
 import java.math.BigInteger;
 import java.time.LocalDateTime;
@@ -16,6 +16,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 @Entity
 public class User {
 
@@ -25,7 +26,7 @@ public class User {
   private BigInteger id;
 
   // 회원 아이디
-  private String userID;
+  private String user_login_id;
 
   // 회원 비밀번호
   private String password;

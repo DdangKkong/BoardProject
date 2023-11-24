@@ -1,7 +1,7 @@
-package domain;
+package zerobase.boardproject.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import java.math.BigInteger;
-import java.time.DateTimeException;
 import java.time.LocalDateTime;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -35,6 +35,7 @@ public class Posts {
   private String content;
 
   // 게시글 작성 일시
+  @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Seoul")
   private LocalDateTime created_date;
 
   // 게시글 수정 일시
