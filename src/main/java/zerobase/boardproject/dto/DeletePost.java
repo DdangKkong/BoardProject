@@ -1,17 +1,15 @@
 package zerobase.boardproject.dto;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.sun.istack.NotNull;
 import java.math.BigInteger;
 import java.sql.Timestamp;
-import java.time.LocalDateTime;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-public class CreatePost {
+public class DeletePost {
 
   @Getter
   @Setter
@@ -20,13 +18,7 @@ public class CreatePost {
   public static class Request {
 
     @NotNull
-    private BigInteger userId;
-
-    @NotNull
-    private String title;
-
-    @NotNull
-    private String content;
+    private BigInteger postId;
 
   }
 
@@ -36,13 +28,13 @@ public class CreatePost {
   @AllArgsConstructor
   @Builder
   public static class Response {
-    private BigInteger userId;
+    private BigInteger postId;
     private Timestamp dateTime;
 
     public static Response from(PostDto postDto) {
       return Response.builder()
-          .userId(postDto.getUserId())
-          .dateTime(postDto.getCreatedDate())
+          .postId(postDto.getPostId())
+          .dateTime(postDto.getRemovedDate())
           .build();
     }
 

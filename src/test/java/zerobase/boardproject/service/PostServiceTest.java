@@ -3,10 +3,12 @@ package zerobase.boardproject.service;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.verify;
 
 import java.math.BigInteger;
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.Optional;
 import org.junit.jupiter.api.Test;
@@ -44,6 +46,8 @@ class PostServiceTest {
     given(postRepository.save(any()))
         .willReturn(Posts.builder()
             .user(user)
+//            .title(anyString())
+//            .content(anyString())
             .build());
     ArgumentCaptor<Posts> captor = ArgumentCaptor.forClass(Posts.class);
 
@@ -52,9 +56,12 @@ class PostServiceTest {
 
       //then
     verify(postRepository).save(captor.capture());
-    assertEquals(BigInteger.valueOf(12), postDto.getUser_id());
+    assertEquals(BigInteger.valueOf(12), postDto.getUserId());
     assertEquals("subject", captor.getValue().getTitle());
     assertEquals("zerobase", captor.getValue().getContent());
+
+//    assertEquals("subject", postDto.getTitle());
+//    assertEquals("zerobase", postDto.getContent());
 
   }
 
@@ -68,7 +75,7 @@ class PostServiceTest {
         .id(BigInteger.valueOf(13))
         .title("Sorry")
         .content("GoodBye")
-        .created_date(LocalDateTime.of(2023,1,29,4,50))
+        .createdDate(Timestamp.valueOf(LocalDateTime.of(2023,1,29,4,50)))
         .build();
     given(postRepository.findById(any(BigInteger.class)))
         .willReturn(Optional.of(posts));
@@ -79,11 +86,11 @@ class PostServiceTest {
 
       //then
     verify(postRepository).save(captor.capture());
-    assertEquals(BigInteger.valueOf(13), postDto.getPost_id());
+    assertEquals(BigInteger.valueOf(13), postDto.getPostId());
     assertEquals("Deleted", postDto.getContent());
-    assertEquals(LocalDateTime.of(2023,1,29,4,50),
-        postDto.getCreated_date());
-    assertNotNull(postDto.getRemoved_date());
+    assertEquals(Timestamp.valueOf(LocalDateTime.of(2023,1,29,4,50)),
+        postDto.getCreatedDate());
+    assertNotNull(postDto.getRemovedDate());
 
   }
 
@@ -106,10 +113,34 @@ class PostServiceTest {
 
       //then
     verify(postRepository).save(captor.capture());
-    assertEquals(BigInteger.valueOf(13), postDto.getPost_id());
+    assertEquals(BigInteger.valueOf(13), postDto.getPostId());
     assertEquals("Modified title", postDto.getTitle());
     assertEquals("modified content", postDto.getContent());
-    assertNotNull(postDto.getModified_date());
+    assertNotNull(postDto.getModifiedDate());
+
+  }
+
+  @Test
+  void readPost() {
+      //given
+    User user = User.builder()
+        .nickname("wonwoo").build();
+    user.setId(BigInteger.valueOf(12));
+    Posts posts = Posts.builder()
+        .id(BigInteger.valueOf(13))
+        .user(user)
+        .title("subject")
+        .content("zerobase").build();
+    given(postRepository.findById(any(BigInteger.class)))
+        .willReturn(Optional.of(posts));
+
+      //when
+    PostDto postDto = postService.readPost(BigInteger.valueOf(13));
+
+      //then
+    assertEquals(BigInteger.valueOf(12), postDto.getUserId());
+    assertEquals("subject", postDto.getTitle());
+    assertEquals("zerobase", postDto.getContent());
 
   }
 

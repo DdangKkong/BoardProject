@@ -1,10 +1,15 @@
 package zerobase.boardproject.controller;
 
+import javax.validation.Valid;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import zerobase.boardproject.dto.CreatePost;
+import zerobase.boardproject.dto.DeletePost;
+import zerobase.boardproject.dto.ModifyPost;
+import zerobase.boardproject.dto.ReadPost;
 import zerobase.boardproject.service.PostService;
 
 @RestController
@@ -17,15 +22,46 @@ public class PostController {
   }
 
   // 게시글 등록
-  @PostMapping("/create")
+  @PostMapping("/writing-form")
   public CreatePost.Response createPost(
-      @RequestBody CreatePost.Request request
+      @RequestBody @Valid CreatePost.Request request
   ) {
     return CreatePost.Response.from(
         postService.createPost(
-            request.getUser_id(), request.getTitle(), request.getContent()
+            request.getUserId(), request.getTitle(), request.getContent()
         )
     );
   }
+
+  // 게시글 삭제
+  @PostMapping("/delete-form")
+  public DeletePost.Response deletePost(
+      @RequestBody @Valid DeletePost.Request request
+  ) {
+    return DeletePost.Response.from(
+        postService.deletePost(request.getPostId()));
+  }
+
+  // 게시글 수정
+  @PostMapping("/modification-form")
+  public ModifyPost.Response modifyPost(
+      @RequestBody @Valid ModifyPost.Request request
+  ) {
+    return ModifyPost.Response.from(
+        postService.modifyPost(
+            request.getPostId(), request.getTitle(), request.getContent()
+        )
+    );
+  }
+
+  // 게시글 조회
+  @GetMapping("/check-post")
+  public ReadPost.Response readPost(
+      @RequestBody @Valid ReadPost.Request request
+  ) {
+    return ReadPost.Response.from(
+        postService.readPost(request.getPostId()));
+  }
+
 
 }
