@@ -36,11 +36,11 @@ public class Posts {
   private BigInteger id;
 
   // 게시글 제목
-  @Column(name = "titles")
+  @Column(name = "title")
   private String title;
 
   // 게시글 내용
-  @Column(name = "contents")
+  @Column(name = "content")
   private String content;
 
   // 게시글 작성 일시

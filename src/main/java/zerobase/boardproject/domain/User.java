@@ -35,11 +35,11 @@ public class User {
   private String userLoginId;
 
   // 회원 비밀번호
-  @Column(name = "passwords")
+  @Column(name = "password")
   private String password;
 
   // 회원 닉네임
-  @Column(name = "nicknames")
+  @Column(name = "nickname")
   private String nickname;
 
   // 회원가입 일시
