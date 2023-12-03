@@ -2,7 +2,6 @@ package zerobase.boardproject.dto;
 
 import java.math.BigInteger;
 import java.sql.Timestamp;
-import java.time.LocalDateTime;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;

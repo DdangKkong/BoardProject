@@ -13,7 +13,7 @@ import zerobase.boardproject.dto.ReadPost;
 import zerobase.boardproject.service.PostService;
 
 @RestController
-@RequestMapping("/posts")
+@RequestMapping("/board")
 public class PostController {
 
   private final PostService postService;
@@ -22,7 +22,7 @@ public class PostController {
   }
 
   // 게시글 등록
-  @PostMapping("/writing-form")
+  @PostMapping("/posts")
   public CreatePost.Response createPost(
       @RequestBody @Valid CreatePost.Request request
   ) {
@@ -34,7 +34,7 @@ public class PostController {
   }
 
   // 게시글 삭제
-  @PostMapping("/delete-form")
+  @PostMapping("/letter")
   public DeletePost.Response deletePost(
       @RequestBody @Valid DeletePost.Request request
   ) {
@@ -43,7 +43,7 @@ public class PostController {
   }
 
   // 게시글 수정
-  @PostMapping("/modification-form")
+  @PostMapping("/form")
   public ModifyPost.Response modifyPost(
       @RequestBody @Valid ModifyPost.Request request
   ) {
@@ -55,7 +55,7 @@ public class PostController {
   }
 
   // 게시글 조회
-  @GetMapping("/check-post")
+  @GetMapping("/posts")
   public ReadPost.Response readPost(
       @RequestBody @Valid ReadPost.Request request
   ) {

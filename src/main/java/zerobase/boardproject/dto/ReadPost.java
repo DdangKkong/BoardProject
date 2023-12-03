@@ -2,7 +2,6 @@ package zerobase.boardproject.dto;
 
 import com.sun.istack.NotNull;
 import java.math.BigInteger;
-import java.sql.Timestamp;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;

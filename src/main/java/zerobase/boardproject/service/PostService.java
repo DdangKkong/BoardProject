@@ -3,7 +3,6 @@ package zerobase.boardproject.service;
 import java.math.BigInteger;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
-import java.util.Optional;
 import org.springframework.stereotype.Service;
 import zerobase.boardproject.domain.Posts;
 import zerobase.boardproject.domain.User;
