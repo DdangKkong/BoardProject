@@ -1,5 +1,6 @@
 package zerobase.boardproject.controller;
 
+import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,15 +20,14 @@ public class UserController {
 
   // 회원가입
   @PostMapping("/signup")
-  public ResponseEntity<User> signUp(@RequestBody AuthDto.SignUp request) {
-    System.out.println("요청들어옴");
+  public ResponseEntity<User> signUp(@RequestBody @Valid AuthDto.SignUp request) {
     User user = userService.register(request);
-    return ResponseEntity.ok(user);
+    return ResponseEntity.ok().body(user);
   }
 
   // 로그인
 //  @PostMapping("/signin")
-//  public ResponseEntity<User> signIn (@RequestBody AuthDto.SignIn request) {
+//  public ResponseEntity<User> signIn (@RequestBody @Valid AuthDto.SignIn request) {
 //    return ResponseEntity.ok();
 //  }
 

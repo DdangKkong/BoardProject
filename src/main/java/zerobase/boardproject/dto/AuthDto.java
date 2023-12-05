@@ -2,7 +2,9 @@ package zerobase.boardproject.dto;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import zerobase.boardproject.domain.User;
 
 public class AuthDto {
@@ -15,17 +17,18 @@ public class AuthDto {
 
   }
   @Data
+  @NoArgsConstructor
   public static class SignUp {
 
     private String userLoginId;
     private String password;
-    private String nickName;
+    private String nickname;
 
     public User toEntity() {
       return User.builder()
           .userLoginId(this.userLoginId)
           .password(this.password)
-          .nickname(this.nickName)
+          .nickname(this.nickname)
           .createdDate(Timestamp.valueOf(LocalDateTime.now()))
           .build();
     }
