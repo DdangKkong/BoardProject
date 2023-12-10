@@ -1,6 +1,9 @@
 package zerobase.boardproject.controller;
 
 import javax.validation.Valid;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -23,35 +26,38 @@ public class PostController {
 
   // 게시글 등록
   @PostMapping("/posts")
-  public CreatePost.Response createPost(
-      @RequestBody @Valid CreatePost.Request request
+  public ResponseEntity<String> createPost(
+      @RequestBody @Valid CreatePost.Request request, Authentication authentication
   ) {
-    return CreatePost.Response.from(
+    CreatePost.Response.from(
         postService.createPost(
             request.getUserId(), request.getTitle(), request.getContent()
         )
     );
+    return ResponseEntity.ok().body(authentication.getName() + "님의 게시글 등록이 완료 되었습니다.");
   }
 
   // 게시글 삭제
-  @PostMapping("/letter")
-  public DeletePost.Response deletePost(
+  @DeleteMapping("/posts")
+  public ResponseEntity<String> deletePost(
       @RequestBody @Valid DeletePost.Request request
   ) {
-    return DeletePost.Response.from(
-        postService.deletePost(request.getPostId()));
+    DeletePost.Response.from(
+        postService.deletePost(request.getUserId(), request.getPostId()));
+    return ResponseEntity.ok().body("delete complete");
   }
 
   // 게시글 수정
   @PostMapping("/form")
-  public ModifyPost.Response modifyPost(
+  public ResponseEntity<String> modifyPost(
       @RequestBody @Valid ModifyPost.Request request
   ) {
-    return ModifyPost.Response.from(
+    ModifyPost.Response.from(
         postService.modifyPost(
             request.getPostId(), request.getTitle(), request.getContent()
         )
     );
+    return ResponseEntity.ok().body("modify complete");
   }
 
   // 게시글 조회

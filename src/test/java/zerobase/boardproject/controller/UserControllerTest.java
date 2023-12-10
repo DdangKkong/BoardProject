@@ -30,7 +30,7 @@
 //  private ObjectMapper objectMapper;
 //
 //  @Test
-//  void signUp() throws Exception {
+//  void signUp() throws AppException {
 //
 //      //given
 //    AuthDto.SignUp dto = AuthDto.SignUp.builder()

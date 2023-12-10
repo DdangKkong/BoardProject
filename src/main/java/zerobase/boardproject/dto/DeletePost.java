@@ -18,6 +18,8 @@ public class DeletePost {
   public static class Request {
 
     @NotNull
+    private BigInteger userId;
+    @NotNull
     private BigInteger postId;
 
   }

@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import zerobase.boardproject.domain.User;
 import zerobase.boardproject.dto.AuthDto;
 import zerobase.boardproject.service.UserService;
 
@@ -20,15 +19,16 @@ public class UserController {
 
   // 회원가입
   @PostMapping("/signup")
-  public ResponseEntity<User> signUp(@RequestBody @Valid AuthDto.SignUp request) {
-    User user = userService.register(request);
-    return ResponseEntity.ok().body(user);
+  public ResponseEntity<String> signUp(@RequestBody @Valid AuthDto.SignUp request) {
+    userService.register(request);
+    return ResponseEntity.ok().body("welcome to join us");
   }
 
-  // 로그인
-//  @PostMapping("/signin")
-//  public ResponseEntity<User> signIn (@RequestBody @Valid AuthDto.SignIn request) {
-//    return ResponseEntity.ok();
-//  }
+//   로그인
+  @PostMapping("/signin")
+  public ResponseEntity<String> signIn (@RequestBody @Valid AuthDto.SignIn request) {
+    String token =  userService.login(request);
+    return ResponseEntity.ok().body(token);
+  }
 
 }

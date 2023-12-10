@@ -81,7 +81,7 @@ class PostServiceTest {
     ArgumentCaptor<Posts> captor = ArgumentCaptor.forClass(Posts.class);
 
       //when
-    PostDto postDto = postService.deletePost(BigInteger.valueOf(13));
+    PostDto postDto = postService.deletePost(BigInteger.valueOf(12), BigInteger.valueOf(13));
 
       //then
     verify(postRepository).save(captor.capture());

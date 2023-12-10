@@ -28,10 +28,14 @@ public class ReadPost {
   @Builder
   public static class Response {
     private BigInteger postId;
+    private String title;
+    private String content;
 
     public static Response from(PostDto postDto) {
       return Response.builder()
           .postId(postDto.getPostId())
+          .title(postDto.getTitle())
+          .content(postDto.getContent())
           .build();
     }
 

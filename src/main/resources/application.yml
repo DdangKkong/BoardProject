@@ -12,3 +12,8 @@ spring:
     database-platform: org.hibernate.dialect.MySQL8Dialect
     generate-ddl: true
     show-sql: true
+#  properties에 선언
+#  jwt:
+#    jwt secretKey 설정
+#    secret: hello.world.ee.ff
+#    secret: ZGF5b25lLXNwcmluZy1ib290LWRpdmlkZW5kLXByb2plY3QtdHV0b3JpYWwtand0LXNlY3JldC1rZXkK
