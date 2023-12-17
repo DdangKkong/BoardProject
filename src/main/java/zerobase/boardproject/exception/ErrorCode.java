@@ -12,7 +12,10 @@ public enum ErrorCode {
   USERLOGINID_NOT_FOUND(HttpStatus.NOT_FOUND, ""),
   INVALID_PASSWORD(HttpStatus.UNAUTHORIZED, ""),
   TOKEN_EXPIRED(HttpStatus.UNAUTHORIZED, ""),
-  USER_UNMACHED(HttpStatus.UNAUTHORIZED,"");
+  USER_UNMACHED(HttpStatus.FORBIDDEN,""),
+  USERID_NOT_FOUND(HttpStatus.NOT_FOUND, ""),
+  POSTID_NOT_FOUND(HttpStatus.NOT_FOUND, ""),
+  COMMENTID_NOT_FOUND(HttpStatus.NOT_FOUND, "");
 
   private HttpStatus httpStatus;
   private String message;

@@ -8,7 +8,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-public class ReadPost {
+public class ReadComment {
 
   @Getter
   @Setter
@@ -17,7 +17,7 @@ public class ReadPost {
   public static class Request {
 
     @NotNull
-    private BigInteger postId;
+    private BigInteger commentId;
 
   }
 
@@ -27,13 +27,11 @@ public class ReadPost {
   @AllArgsConstructor
   @Builder
   public static class Response {
-    private String title;
     private String content;
 
-    public static Response from(PostDto postDto) {
+    public static Response from(CommentDto commentDto) {
       return Response.builder()
-          .title(postDto.getTitle())
-          .content(postDto.getContent())
+          .content(commentDto.getContent())
           .build();
     }
 
