@@ -1,7 +1,7 @@
 package zerobase.boardproject.dto;
 
 import java.math.BigInteger;
-import java.time.LocalDateTime;
+import java.sql.Timestamp;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -17,10 +17,10 @@ import zerobase.boardproject.domain.Posts;
 public class PostDto {
 
   // 회원 id
-  private BigInteger user_id;
+  private BigInteger userId;
 
   // 게시글 id
-  private BigInteger post_id;
+  private BigInteger postId;
 
   // 게시글 제목
   private String title;
@@ -29,23 +29,24 @@ public class PostDto {
   private String content;
 
   // 게시글 작성 일시
-  private LocalDateTime created_date;
+  //  @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Seoul")
+  private Timestamp createdDate;
 
   // 게시글 수정 일시
-  private LocalDateTime modified_date;
+  private Timestamp modifiedDate;
 
   // 게시글 삭제 일시
-  private LocalDateTime removed_date;
+  private Timestamp removedDate;
 
   public static PostDto fromEntity(Posts posts){
     return PostDto.builder()
-        .user_id(posts.getUser().getId())
-        .post_id(posts.getId())
+        .userId(posts.getUser().getId())
+        .postId(posts.getId())
         .title(posts.getTitle())
         .content(posts.getContent())
-        .created_date(posts.getCreated_date())
-        .modified_date(posts.getModified_date())
-        .removed_date(posts.getRemoved_date())
+        .createdDate(posts.getCreatedDate())
+        .modifiedDate(posts.getModifiedDate())
+        .removedDate(posts.getRemovedDate())
         .build();
   }
 
