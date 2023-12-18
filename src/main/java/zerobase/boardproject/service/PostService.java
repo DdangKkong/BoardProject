@@ -81,12 +81,12 @@ public class PostService {
 
   private User getUser(BigInteger userId) {
     return userRepository.findById(userId)
-        .orElseThrow(() -> new RuntimeException("유저가 없습니다"));
+        .orElseThrow(() -> new AppException(ErrorCode.USERID_NOT_FOUND, "회원이 아닙니다"));
   }
 
   private Posts getPost(BigInteger postId) {
     return postRepository.findById(postId)
-        .orElseThrow(() -> new RuntimeException("게시글이 없습니다"));
+        .orElseThrow(() -> new AppException(ErrorCode.POSTID_NOT_FOUND, "게시글이 없습니다"));
   }
 
 }

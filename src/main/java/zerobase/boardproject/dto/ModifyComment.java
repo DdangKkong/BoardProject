@@ -2,13 +2,14 @@ package zerobase.boardproject.dto;
 
 import com.sun.istack.NotNull;
 import java.math.BigInteger;
+import java.sql.Timestamp;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-public class ReadPost {
+  public class ModifyComment {
 
   @Getter
   @Setter
@@ -17,7 +18,10 @@ public class ReadPost {
   public static class Request {
 
     @NotNull
-    private BigInteger postId;
+    private BigInteger commentId;
+
+    @NotNull
+    private String content;
 
   }
 
@@ -27,13 +31,13 @@ public class ReadPost {
   @AllArgsConstructor
   @Builder
   public static class Response {
-    private String title;
-    private String content;
+    private BigInteger commentId;
+    private Timestamp dateTime;
 
-    public static Response from(PostDto postDto) {
+    public static Response from(CommentDto commentDto) {
       return Response.builder()
-          .title(postDto.getTitle())
-          .content(postDto.getContent())
+          .commentId(commentDto.getCommentId())
+          .dateTime(commentDto.getModifiedDate())
           .build();
     }
 

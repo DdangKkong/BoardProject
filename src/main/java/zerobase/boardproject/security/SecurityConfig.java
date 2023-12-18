@@ -4,7 +4,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -29,7 +28,8 @@ public class SecurityConfig {
         .cors().and()
         .authorizeRequests()
         .antMatchers("/users/signup", "/users/signin").permitAll() // join, login은 언제나 가능
-        .antMatchers(HttpMethod.POST, "/**").authenticated() // POST 요청은 일단 다 막음
+//        .antMatchers(HttpMethod.POST, "/**").authenticated() // POST 요청은 일단 다 막음
+        .antMatchers("/**").authenticated() // 접근 다 막음
         .and()
         .sessionManagement()
         .sessionCreationPolicy(SessionCreationPolicy.STATELESS) // jwt사용하는 경우 씀
